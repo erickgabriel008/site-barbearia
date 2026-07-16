@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Barbearia Prime</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Bebas+Neue&display=swap" rel="stylesheet">
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background-color: #f5f1ea;
+      color: #1d1d1d;
+      transition: background-color 0.3s, color 0.3s;
+    }
+
+    body.escuro {
+      background-color: #111827;
+      color: #f0f0f0;
+    }
+
+    body.escuro section {
+      background-color: #1c2434;
+      box-shadow: 0 5px 16px #00000040;
+    }
+
+    body.escuro .servico {
+      background-color: #232c3f;
+    }
+
+    header {
+      background-color: #171717;
+      color: white;
+      padding: 24px 8%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: relative;
+    }
+
+    header h1 {
+      font-family: 'Bebas Neue', sans-serif;
+      margin: 0;
+      color: #d4a24c;
+    }
+
+    nav {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      margin-left: 18px;
+      font-weight: bold;
+    }
+
+    nav a:hover {
+      color: #d4a24c;
+    }
+
+    #botao-tema {
+      background: none;
+      border: 2px solid #d4a24c;
+      color: #d4a24c;
+      padding: 6px 12px;
+      border-radius: 6px;
+      cursor: pointer;
+      margin-left: 18px;
+      font-weight: bold;
+    }
+
+    #botao-tema:hover {
+      background-color: #d4a24c;
+      color: #171717;
+    }
+
+    #botao-menu {
+      display: none;
+      background: none;
+      border: none;
+      color: white;
+      font-size: 26px;
+      cursor: pointer;
+    }
+
+    main {
+      max-width: 1000px;
+      margin: auto;
+      padding: 32px 20px;
+    }
+
+    section {
+      background-color: white;
+      padding: 28px;
+      margin-bottom: 24px;
+      border-radius: 12px;
+      box-shadow: 0 5px 16px #00000018;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.6s ease, transform 0.6s ease, background-color 0.3s;
+    }
+
+    section.visivel {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .hero {
+      background-color: #1d1d1d;
+      color: white;
+      text-align: center;
+      padding: 60px 25px;
+    }
+
+    .hero h2 {
+      color: #d4a24c;
+      font-size: 32px;
+    }
+
+    .foto-barbearia {
+      width: 100%;
+      max-width: 550px;
+      height: 280px;
+      object-fit: cover;
+      border-radius: 10px;
+      display: block;
+      margin: 24px auto;
+    }
+
+    .botao-whatsapp {
+      display: inline-block;
+      background-color: #d4a24c;
+      color: #171717;
+      text-decoration: none;
+      font-weight: bold;
+      padding: 14px 20px;
+      border-radius: 8px;
+      transition: background-color 0.2s, transform 0.2s;
+    }
+
+    .botao-whatsapp:hover {
+      background-color: #f0bd63;
+      transform: translateY(-2px);
+    }
+
+    h2 {
+      color: #9b6d22;
+    }
+
+    .lista-servicos {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+
+    .servico {
+      background-color: #f5f1ea;
+      border-left: 5px solid #d4a24c;
+      padding: 20px;
+      border-radius: 8px;
+      transition: transform 0.25s, box-shadow 0.25s, background-color 0.3s;
+    }
+
+    .servico:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 20px #00000022;
+    }
+
+    .servico h3 {
+      margin-top: 0;
+      color: #1d1d1d;
+    }
+
+    body.escuro .servico h3 {
+      color: #f0f0f0;
+    }
+
+    .preco {
+      color: #9b6d22;
+      font-size: 20px;
+      font-weight: bold;
+    }
+
+    .galeria {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+    }
+
+    .galeria img {
+      width: 100%;
+      height: 220px;
+      object-fit: contain;
+      background-color: #e8e2d5;
+      border-radius: 8px;
+      transition: transform 0.3s;
+    }
+
+    .galeria img:hover {
+      transform: scale(1.05);
+    }
+
+    .lista-depoimentos {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+    }
+
+    .depoimento {
+      background-color: #f5f1ea;
+      padding: 20px;
+      border-radius: 8px;
+      border-left: 5px solid #d4a24c;
+    }
+
+    body.escuro .depoimento {
+      background-color: #232c3f;
+    }
+
+    .depoimento p {
+      font-style: italic;
+      margin: 0 0 10px;
+    }
+
+    .depoimento span {
+      font-weight: bold;
+      color: #9b6d22;
+    }
+
+    .mapa-container {
+      overflow: hidden;
+      border-radius: 10px;
+      margin-top: 16px;
+    }
+
+    .mapa-container iframe {
+      display: block;
+      width: 100%;
+      height: 300px;
+      border: 0;
+    }
+
+    .form-contato {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      max-width: 500px;
+    }
+
+    .form-contato label {
+      font-weight: bold;
+      margin-bottom: 4px;
+      display: block;
+    }
+
+    .form-contato input,
+    .form-contato textarea {
+      width: 100%;
+      padding: 10px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      font-family: inherit;
+      font-size: 15px;
+    }
+
+    .form-contato button {
+      background-color: #d4a24c;
+      color: #171717;
+      border: none;
+      padding: 12px;
+      border-radius: 8px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background-color 0.2s;
+    }
+
+    .form-contato button:hover {
+      background-color: #f0bd63;
+    }
+
+    #mensagem-envio {
+      margin-top: 10px;
+      font-weight: bold;
+      color: #2e7d32;
+      display: none;
+    }
+
+    footer {
+      background-color: #171717;
+      color: white;
+      text-align: center;
+      padding: 24px;
+    }
+
+    @media (max-width: 600px) {
+      #botao-menu {
+        display: block;
+      }
+
+      nav {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background-color: #171717;
+        padding: 16px 0;
+      }
+
+      nav.aberto {
+        display: flex;
+      }
+
+      nav a {
+        margin: 10px 0;
+      }
+
+      #botao-tema {
+        margin: 10px 0 0;
+      }
+
+      .hero h2 {
+        font-size: 26px;
+      }
+
+      .lista-servicos,
+      .galeria,
+      .lista-depoimentos {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <h1>Barbearia Prime</h1>
+
+    <button id="botao-menu" onclick="alternarMenu()">☰</button>
+
+    <nav id="menu">
+      <a href="#servicos">Serviços</a>
+      <a href="#galeria">Galeria</a>
+      <a href="#depoimentos">Depoimentos</a>
+      <a href="#sobre">Sobre</a>
+      <a href="#localizacao">Localização</a>
+      <a href="#contato">Contato</a>
+      <button id="botao-tema" onclick="mudarTema()">Modo escuro</button>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero">
+      <h2>Corte de respeito. Estilo de verdade.</h2>
+      <p>Cortes modernos, barba e atendimento de qualidade.</p>
+
+      <img
+        class="foto-barbearia"
+        src="barbeiro.jpg"
+        alt="Barbeiro fazendo a barba de um cliente"
+      >
+
+      <a
+        class="botao-whatsapp"
+        href="https://wa.me/5511999999999"
+        target="_blank"
+        rel="noopener"
+      >
+        Agendar pelo WhatsApp
+      </a>
+    </section>
+
+    <section id="servicos">
+      <h2>Serviços</h2>
+
+      <div class="lista-servicos">
+        <article class="servico">
+          <h3>Corte</h3>
+          <p>Corte moderno ou clássico, com acabamento.</p>
+          <p class="preco">R$ 35</p>
+        </article>
+
+        <article class="servico">
+          <h3>Barba</h3>
+          <p>Barba desenhada com toalha quente.</p>
+          <p class="preco">R$ 25</p>
+        </article>
+
+        <article class="servico">
+          <h3>Corte + Barba</h3>
+          <p>O pacote completo para renovar o visual.</p>
+          <p class="preco">R$ 55</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="galeria">
+      <h2>Galeria</h2>
+      <div class="galeria">
+        <img src="corte 1.jpg" alt="Corte de cabelo estilo 1">
+        <img src="corte 2.jpg" alt="Corte de cabelo estilo 2">
+        <img src="corte 3.jpg" alt="Corte de cabelo estilo 3">
+        <img src="barba 1.jpg" alt="Barba feita na navalha">
+        <img src="ambiente.jpg" alt="Ambiente da barbearia">
+        <img src="cliente.jpg" alt="Cliente satisfeito após o corte">
+      </div>
+    </section>
+
+    <section id="depoimentos">
+      <h2>Depoimentos</h2>
+      <div class="lista-depoimentos">
+        <div class="depoimento">
+          <p>"Melhor barbearia que já fui, atendimento impecável."</p>
+          <span>— Rafael M.</span>
+        </div>
+        <div class="depoimento">
+          <p>"Saí de lá renovado, super recomendo o corte + barba."</p>
+          <span>— Diego S.</span>
+        </div>
+        <div class="depoimento">
+          <p>"Ambiente top e preço justo pela qualidade."</p>
+          <span>— Lucas F.</span>
+        </div>
+        <div class="depoimento">
+          <p>"Já virei cliente fiel, sempre saio satisfeito."</p>
+          <span>— Bruno A.</span>
+        </div>
+      </div>
+    </section>
+
+    <section id="sobre">
+      <h2>Sobre a barbearia</h2>
+      <p>
+        Especialistas em cortes clássicos e modernos, barba e acabamento.
+        Atendimento com hora marcada para você sair confiante.
+      </p>
+    </section>
+
+    <section id="localizacao">
+      <h2>Onde estamos</h2>
+      <p>Rua Example, 123 — Centro, São Paulo - SP</p>
+      <div class="mapa-container">
+        <iframe
+          src="https://www.google.com/maps?q=Av.+Paulista,+São+Paulo&output=embed"
+          allowfullscreen=""
+          loading="lazy"
+        ></iframe>
+      </div>
+    </section>
+
+    <section id="contato">
+      <h2>Fale conosco</h2>
+      <form class="form-contato" onsubmit="enviarFormulario(event)">
+        <div>
+          <label for="nome">Nome</label>
+          <input type="text" id="nome" name="nome" required>
+        </div>
+        <div>
+          <label for="telefone">Telefone</label>
+          <input type="tel" id="telefone" name="telefone" required>
+        </div>
+        <div>
+          <label for="mensagem">Mensagem</label>
+          <textarea id="mensagem" name="mensagem" rows="4" required></textarea>
+        </div>
+        <button type="submit">Enviar mensagem</button>
+        <p id="mensagem-envio">Mensagem enviada! Em breve entraremos em contato.</p>
+      </form>
+    </section>
+  </main>
+
+  <footer>
+    <p>WhatsApp: (11) 99999-9999</p>
+    <p>© 2026 Barbearia Prime</p>
+  </footer>
+
+  <script>
+    // modo escuro com memória (localStorage)
+    function mudarTema() {
+      document.body.classList.toggle("escuro");
+      const ativo = document.body.classList.contains("escuro");
+      localStorage.setItem("tema", ativo ? "escuro" : "claro");
+    }
+
+    window.addEventListener("load", () => {
+      if (localStorage.getItem("tema") === "escuro") {
+        document.body.classList.add("escuro");
+      }
+    });
+
+    // menu hambúrguer
+    function alternarMenu() {
+      document.getElementById("menu").classList.toggle("aberto");
+    }
+
+    // formulário de contato (simulado, sem backend)
+    function enviarFormulario(event) {
+      event.preventDefault();
+      document.getElementById("mensagem-envio").style.display = "block";
+      event.target.reset();
+    }
+
+    // animação de fade-in ao rolar a página
+    const secoes = document.querySelectorAll("section");
+    const observador = new IntersectionObserver((entradas) => {
+      entradas.forEach((entrada) => {
+        if (entrada.isIntersecting) {
+          entrada.target.classList.add("visivel");
+        }
+      });
+    }, { threshold: 0.15 });
+
+    secoes.forEach((secao) => observador.observe(secao));
+  </script>
+</body>
+</html>
